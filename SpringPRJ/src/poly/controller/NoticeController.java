@@ -26,7 +26,7 @@ import poly.util.CmmUtil;
 public class NoticeController {
 	// 로그 파일 생성 및 로그 출력을 위한 log4j 프레임워크의 자바 객체
 	private Logger log = Logger.getLogger(this.getClass());
-	
+
 	@RequestMapping(value = "index")
 	public String Index() {
 		log.info(this.getClass());
@@ -35,7 +35,7 @@ public class NoticeController {
 	}
 
 	/*
-	 * 비즈니스 로직(중요 로직을 수행하기 위해 사용되는 서비스를 메모리에 적재(싱글톤패턴 적용됨) static 선언 방식 기반의 싱글톤패턴
+	 * 비즈니스 로직(중요 로직을 수행하기 위해 사용되는 서비스를 메모리에 적재(싱글톤패턴 적용됨) static 선언 방식 기반의 싱글톤패턴)
 	 */
 	@Resource(name = "NoticeService") // Service 자바 파일중 NoticeService 찾아서 연결.
 	private INoticeService noticeService; // Service 호출을 위한 객체 생성.
@@ -134,7 +134,7 @@ public class NoticeController {
 			/*
 			 * 게시글 등록하기위한 비즈니스 로직을 호출
 			 */
-			noticeService.InsertNoticeInfo(pDTO);
+			noticeService.insertNoticeInfo(pDTO);
 
 			// 저장이 완료되면 사용자에게 보여줄 메시지
 			msg = "등록되었습니다.";

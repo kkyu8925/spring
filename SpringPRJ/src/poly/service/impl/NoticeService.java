@@ -24,8 +24,8 @@ public class NoticeService implements INoticeService {
 	}
 
 	@Override
-	public void InsertNoticeInfo(NoticeDTO pDTO) throws Exception {
-		noticeMapper.InsertNoticeInfo(pDTO);
+	public void insertNoticeInfo(NoticeDTO pDTO) throws Exception {
+		noticeMapper.insertNoticeInfo(pDTO);
 
 	}
 
