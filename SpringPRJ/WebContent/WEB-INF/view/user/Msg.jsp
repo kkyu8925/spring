@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-	
+<%=CmmUtil.nvl(pDTO.getUser_name()) %>님의 회원가입을 축하합니다.
 
 </body>
 </html>
