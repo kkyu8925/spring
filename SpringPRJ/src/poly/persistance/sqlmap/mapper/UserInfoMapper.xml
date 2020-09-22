@@ -13,7 +13,9 @@
 		ADDR1,
 		ADDR2,
 		REG_ID,
-		CHG_ID
+		REG_DT,
+		CHG_ID,
+		CHG_DT
 		)VALUES(
 		#{user_id},
 		#{user_name},
@@ -22,7 +24,9 @@
 		#{addr1},
 		#{addr2},
 		#{user_id},
-		#{user_id}
+		SYSDATE,
+		#{user_id},
+		SYSDATE
 		)
 	</insert>
 
