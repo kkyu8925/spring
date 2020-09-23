@@ -25,14 +25,14 @@
 	</repositories>
 
 	<dependencies>
-		
-		<!-- 데이터 전송시, 문자 깨지는 현상을 방지하기 위한 BASE64 인코딩  -->
+
+		<!-- 데이터 전송시, 문자 깨지는 현상을 방지하기 위한 BASE64 인코딩 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-		
+
 		<!-- 자바 메일 발송 라이브러리 -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -104,8 +104,6 @@
 			<version>1.6.8</version>
 		</dependency>
 
-
-
 		<!-- MyBatis, DBCP -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -135,18 +133,18 @@
 			<version>12.1.0.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.41</version>
-		</dependency>
-
 		<!-- 오라클 DBCP 관리를 위한 c3p0 -->
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.41</version>
 		</dependency>
 
 		<dependency>
