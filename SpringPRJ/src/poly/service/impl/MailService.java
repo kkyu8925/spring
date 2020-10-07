@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import poly.dto.MailDTO;
 import poly.service.IMailService;
 import poly.util.CmmUtil;
+import poly.util.PrivateUtil;
 
 @Service("MailService")
 public class MailService implements IMailService {
@@ -24,8 +25,8 @@ public class MailService implements IMailService {
 	private Logger log = Logger.getLogger(this.getClass());
 
 	final String host = "smtp.naver.com"; // 네이버에서 제공하는 SMTP서버
-	final String user = "gusrb8925@naver.com"; // 본인 네이버 아이디
-	final String password = "";
+	final String user = PrivateUtil.getID();
+	final String password = PrivateUtil.getPW();
 
 	@Override
 	public int doSendMail(MailDTO pDTO) {

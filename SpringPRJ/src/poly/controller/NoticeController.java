@@ -322,7 +322,7 @@ public class NoticeController {
 	/**
 	 * 게시판 글 삭제
 	 */
-	@RequestMapping(value = "notice/NoticeDelete", method = RequestMethod.POST)
+	@RequestMapping(value = "notice/NoticeDelete")
 	public String NoticeDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
 
