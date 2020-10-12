@@ -1,0 +1,228 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-12-2020   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table FOOD_INFO
+--------------------------------------------------------
+
+  CREATE TABLE "FOOD_INFO" 
+   (	"COLLECT_TIME" VARCHAR2(20 BYTE), 
+	"SEQ" NUMBER, 
+	"DAY" VARCHAR2(9 BYTE), 
+	"FOOD_NM" VARCHAR2(160 BYTE), 
+	"REG_ID" VARCHAR2(16 BYTE), 
+	"REG_DT" DATE DEFAULT SYSDATE, 
+	"CHG_ID" VARCHAR2(16 BYTE), 
+	"CHG_DT" DATE DEFAULT SYSDATE
+   ) ;
+ 
+
+   COMMENT ON COLUMN "FOOD_INFO"."COLLECT_TIME" IS '수집년월일분초';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."SEQ" IS '순번';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."DAY" IS '요일';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."FOOD_NM" IS '식단';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."REG_ID" IS '최초등록자';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."REG_DT" IS '최초등록일';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."CHG_ID" IS '최근수정자';
+ 
+   COMMENT ON COLUMN "FOOD_INFO"."CHG_DT" IS '최근수정일';
+--------------------------------------------------------
+--  DDL for Table MOVIE_INFO
+--------------------------------------------------------
+
+  CREATE TABLE "MOVIE_INFO" 
+   (	"RANK_CHECK_TIME" VARCHAR2(20 BYTE), 
+	"SEQ" VARCHAR2(20 BYTE), 
+	"MOVIE_RANK" VARCHAR2(20 BYTE), 
+	"MOVIE_NM" VARCHAR2(80 BYTE), 
+	"SCORE" VARCHAR2(20 BYTE), 
+	"OPEN_DAY" VARCHAR2(20 BYTE), 
+	"REG_ID" VARCHAR2(20 BYTE), 
+	"REG_DT" DATE DEFAULT SYSDATE, 
+	"CHG_ID" VARCHAR2(20 BYTE), 
+	"CHG_DT" DATE DEFAULT SYSDATE, 
+	"MOVIE_RESERVE" VARCHAR2(20 BYTE)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "MOVIE_INFO"."RANK_CHECK_TIME" IS '수집시간';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."SEQ" IS '수집시간에 따른 순번';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."MOVIE_RANK" IS '영화순위';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."MOVIE_NM" IS '영화이름';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."SCORE" IS '점수';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."OPEN_DAY" IS '개봉일';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."REG_ID" IS '최초등록자';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."REG_DT" IS '최초등록일';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."CHG_ID" IS '최근수정자';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."CHG_DT" IS '최근수정일';
+ 
+   COMMENT ON COLUMN "MOVIE_INFO"."MOVIE_RESERVE" IS '예매율';
+--------------------------------------------------------
+--  DDL for Table NOTICE
+--------------------------------------------------------
+
+  CREATE TABLE "NOTICE" 
+   (	"NOTICE_SEQ" NUMBER, 
+	"TITLE" VARCHAR2(20 BYTE), 
+	"NOTICE_YN" VARCHAR2(20 BYTE), 
+	"CONTENTS" VARCHAR2(20 BYTE), 
+	"USER_ID" VARCHAR2(20 BYTE), 
+	"READ_CNT" NUMBER, 
+	"REG_ID" VARCHAR2(20 BYTE), 
+	"REG_DT" DATE DEFAULT SYSDATE, 
+	"CHG_ID" VARCHAR2(20 BYTE), 
+	"CHG_DT" DATE DEFAULT SYSDATE
+   ) ;
+ 
+
+   COMMENT ON COLUMN "NOTICE"."NOTICE_SEQ" IS '글번호';
+ 
+   COMMENT ON COLUMN "NOTICE"."TITLE" IS '제목';
+ 
+   COMMENT ON COLUMN "NOTICE"."NOTICE_YN" IS '공지글여부';
+ 
+   COMMENT ON COLUMN "NOTICE"."CONTENTS" IS '내용';
+ 
+   COMMENT ON COLUMN "NOTICE"."USER_ID" IS '아이디';
+ 
+   COMMENT ON COLUMN "NOTICE"."READ_CNT" IS '조회수';
+ 
+   COMMENT ON COLUMN "NOTICE"."REG_ID" IS '최초등록자';
+ 
+   COMMENT ON COLUMN "NOTICE"."REG_DT" IS '최초등록일';
+ 
+   COMMENT ON COLUMN "NOTICE"."CHG_ID" IS '최근수정자';
+ 
+   COMMENT ON COLUMN "NOTICE"."CHG_DT" IS '최근수저일';
+--------------------------------------------------------
+--  DDL for Table USER_INFO
+--------------------------------------------------------
+
+  CREATE TABLE "USER_INFO" 
+   (	"USER_ID" VARCHAR2(16 BYTE), 
+	"USER_NAME" VARCHAR2(24 BYTE), 
+	"PASSWORD" VARCHAR2(64 BYTE), 
+	"EMAIL" VARCHAR2(128 BYTE), 
+	"ADDR1" VARCHAR2(80 BYTE), 
+	"ADDR2" VARCHAR2(80 BYTE), 
+	"REG_ID" VARCHAR2(16 BYTE), 
+	"REG_DT" DATE DEFAULT SYSDATE, 
+	"CHG_ID" VARCHAR2(16 BYTE), 
+	"CHG_DT" DATE DEFAULT SYSDATE
+   ) ;
+ 
+
+   COMMENT ON COLUMN "USER_INFO"."USER_ID" IS '회원아이디';
+ 
+   COMMENT ON COLUMN "USER_INFO"."USER_NAME" IS '회원이름';
+ 
+   COMMENT ON COLUMN "USER_INFO"."PASSWORD" IS '비밀번호';
+ 
+   COMMENT ON COLUMN "USER_INFO"."EMAIL" IS '이메일';
+ 
+   COMMENT ON COLUMN "USER_INFO"."ADDR1" IS '주소';
+ 
+   COMMENT ON COLUMN "USER_INFO"."ADDR2" IS '상세주소';
+ 
+   COMMENT ON COLUMN "USER_INFO"."REG_ID" IS '최초등록자';
+ 
+   COMMENT ON COLUMN "USER_INFO"."REG_DT" IS '최초등록일';
+ 
+   COMMENT ON COLUMN "USER_INFO"."CHG_ID" IS '최근수정자';
+ 
+   COMMENT ON COLUMN "USER_INFO"."CHG_DT" IS '최근수정일';
+REM INSERTING into FOOD_INFO
+SET DEFINE OFF;
+Insert into FOOD_INFO (COLLECT_TIME,SEQ,DAY,FOOD_NM,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('2020101224112538',3,'수요일','백미밥 , 청국장찌개 , 마늘보쌈 , 청포묵김무침 , 달콤무생채 , 김치','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'));
+Insert into FOOD_INFO (COLLECT_TIME,SEQ,DAY,FOOD_NM,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('2020101224112538',4,'목요일','백미밥 , 부대찌개 , 고메함박스테이크 , 두부조림 , 마늘쫑고추장무침 , 김치','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'));
+Insert into FOOD_INFO (COLLECT_TIME,SEQ,DAY,FOOD_NM,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('2020101224112538',5,'금요일','백미밥 , 북어국 , 매콤고추잡채*꽃빵 , 도톰동그랑땡전 , 사과치커리무침 , 김치','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'));
+Insert into FOOD_INFO (COLLECT_TIME,SEQ,DAY,FOOD_NM,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('2020101224112538',1,'월요일','참치김치덮밥 , 콩나물국 , 핫바*케찹 , 꽃맛살샐러드 , 열무김치 , 카프리썬','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'));
+Insert into FOOD_INFO (COLLECT_TIME,SEQ,DAY,FOOD_NM,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('2020101224112538',2,'화요일','짜장면 , 짬뽕국 , 꿔바로우탕수육 , 단무지,짜사이채 , 김치 , 요구르트','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'));
+REM INSERTING into MOVIE_INFO
+SET DEFINE OFF;
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','1','1','담보','96%','2020.09.29','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'15.8%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','2','2','테넷','93%','2020.08.26','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'14.4%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','3','3','브레이크 더 사일런스: 더 무비(MV)','96%','2020.09.24','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'10.4%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','4','4','어디갔어, 버나뎃','94%','2020.10.08','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'9.8%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','5','5','그대, 고맙소 : 김호중 생애 첫 팬미팅 무비','96%','2020.09.29','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'9.5%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','6','6','언힌지드','86%','2020.10.07','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'4.6%');
+Insert into MOVIE_INFO (RANK_CHECK_TIME,SEQ,MOVIE_RANK,MOVIE_NM,SCORE,OPEN_DAY,REG_ID,REG_DT,CHG_ID,CHG_DT,MOVIE_RESERVE) values ('202010122494828','7','7','애프터-그 후','82%','2020.10.07','admin',to_date('20/10/12','RR/MM/DD'),'admin',to_date('20/10/12','RR/MM/DD'),'2.4%');
+REM INSERTING into NOTICE
+SET DEFINE OFF;
+Insert into NOTICE (NOTICE_SEQ,TITLE,NOTICE_YN,CONTENTS,USER_ID,READ_CNT,REG_ID,REG_DT,CHG_ID,CHG_DT) values (1,'tests','1','11','kkyu8925',0,'kkyu8925',to_date('20/09/21','RR/MM/DD'),'kkyu8925',to_date('20/09/21','RR/MM/DD'));
+Insert into NOTICE (NOTICE_SEQ,TITLE,NOTICE_YN,CONTENTS,USER_ID,READ_CNT,REG_ID,REG_DT,CHG_ID,CHG_DT) values (2,'tsetsses','1','stsetstgfsdfsdfd','kkyu8925',2,'kkyu8925',to_date('20/09/21','RR/MM/DD'),'kkyu8925',to_date('20/09/21','RR/MM/DD'));
+REM INSERTING into USER_INFO
+SET DEFINE OFF;
+Insert into USER_INFO (USER_ID,USER_NAME,PASSWORD,EMAIL,ADDR1,ADDR2,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('test','test','049b996aced8306c3c490829b662486bb6c59e9c43e591540cf1479b13e2509e','bRFs5pXsPNwnYL/LOEJ2Bw==','e','w','test',to_date('20/10/05','RR/MM/DD'),'test',to_date('20/10/05','RR/MM/DD'));
+Insert into USER_INFO (USER_ID,USER_NAME,PASSWORD,EMAIL,ADDR1,ADDR2,REG_ID,REG_DT,CHG_ID,CHG_DT) values ('kkyu8925','강현규','049b996aced8306c3c490829b662486bb6c59e9c43e591540cf1479b13e2509e','GeGuIdA3nMR2rsdTnsqZ7CEM37wTWbx806Mvzl+MW7c=','울산','아파트','kkyu8925',to_date('20/09/21','RR/MM/DD'),'kkyu8925',to_date('20/09/21','RR/MM/DD'));
+--------------------------------------------------------
+--  DDL for Index FOOD_INFO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FOOD_INFO_PK" ON "FOOD_INFO" ("COLLECT_TIME", "SEQ") 
+  ;
+--------------------------------------------------------
+--  DDL for Index MOVIE_INFO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOVIE_INFO_PK" ON "MOVIE_INFO" ("RANK_CHECK_TIME", "SEQ") 
+  ;
+--------------------------------------------------------
+--  DDL for Index NOTICE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NOTICE_PK" ON "NOTICE" ("NOTICE_SEQ") 
+  ;
+--------------------------------------------------------
+--  DDL for Index USER_INFO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "USER_INFO_PK" ON "USER_INFO" ("USER_ID") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table FOOD_INFO
+--------------------------------------------------------
+
+  ALTER TABLE "FOOD_INFO" ADD CONSTRAINT "FOOD_INFO_PK" PRIMARY KEY ("COLLECT_TIME", "SEQ") ENABLE;
+ 
+  ALTER TABLE "FOOD_INFO" MODIFY ("COLLECT_TIME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "FOOD_INFO" MODIFY ("SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MOVIE_INFO
+--------------------------------------------------------
+
+  ALTER TABLE "MOVIE_INFO" ADD CONSTRAINT "MOVIE_INFO_PK" PRIMARY KEY ("RANK_CHECK_TIME", "SEQ") ENABLE;
+ 
+  ALTER TABLE "MOVIE_INFO" MODIFY ("RANK_CHECK_TIME" NOT NULL ENABLE);
+ 
+  ALTER TABLE "MOVIE_INFO" MODIFY ("SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table NOTICE
+--------------------------------------------------------
+
+  ALTER TABLE "NOTICE" ADD CONSTRAINT "NOTICE_PK" PRIMARY KEY ("NOTICE_SEQ") ENABLE;
+ 
+  ALTER TABLE "NOTICE" MODIFY ("NOTICE_SEQ" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table USER_INFO
+--------------------------------------------------------
+
+  ALTER TABLE "USER_INFO" MODIFY ("USER_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "USER_INFO" ADD CONSTRAINT "USER_INFO_PK" PRIMARY KEY ("USER_ID") ENABLE;
