@@ -16,7 +16,7 @@ public class DateUtil {
 		Date today = new Date();
 		System.out.println(today);
 
-		SimpleDateFormat date = new SimpleDateFormat();
+		SimpleDateFormat date = new SimpleDateFormat(fm);
 
 		return date.format(today);
 	}
