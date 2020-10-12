@@ -13,7 +13,7 @@
 		<property name="driverClass"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl"
-			value="jdbc:oracle:thin:@localhost:1521:xe" />
+			value="jdbc:oracle:thin:@localhost:1521:orcl" />
 		<property name="user" value="WEB_USER" /> <!-- 오라클 계정 : 아이디 -->
 		<property name="password" value="1234" /> <!-- 오라클 계정 : 비밀번호 -->
 		<property name="initialPoolSize" value="5" /> <!-- DB접속을 위한 자바 객체 생성 개수 설정 -->
