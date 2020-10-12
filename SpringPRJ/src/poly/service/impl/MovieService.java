@@ -91,8 +91,7 @@ public class MovieService implements IMovieService{
 			res += movieMapper.InsertMovieInfo(pDTO);
 			
 		}
-		log.info("pDTO : " + pDTO.getMovie_nm());
-		log.info("pDTO : " + pDTO.getOpen_day());
+		
 		// 로그찍기
 		log.info(this.getClass().getName() + ".getMovieInfoFromWEB end!!");
 		
