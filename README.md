@@ -1,2 +1,9 @@
 # SpringMVC-Study2
-second SpringMVC study
+
+공지사항 게시판
+메일발송 
+회원가입 
+로그인
+크롤링 웹수집
+이미지 인식하기(딥러닝)
+오피니언마이닝
