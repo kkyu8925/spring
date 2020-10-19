@@ -8,6 +8,7 @@
 		<typeAlias type="poly.dto.UserInfoDTO" alias="UserInfoDTO" />
 		<typeAlias type="poly.dto.MovieDTO" alias="MovieDTO" />
 		<typeAlias type="poly.dto.FoodDTO" alias="FoodDTO" />
+		<typeAlias type="poly.dto.OcrDTO" alias="OcrDTO" />
 		<!-- <typeAlias type="poly.dto.새로만든 자바파일DTO" alias="짧게 사용할 단축 이름DTO" /> -->
 	</typeAliases>
 </configuration>
