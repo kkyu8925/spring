@@ -25,8 +25,8 @@ public class MailService implements IMailService {
 	private Logger log = Logger.getLogger(this.getClass());
 
 	final String host = "smtp.naver.com"; // 네이버에서 제공하는 SMTP서버
-	final String user = PrivateUtil.getID();
-	final String password = PrivateUtil.getPW();
+	final String user = PrivateUtil.getId();
+	final String password = PrivateUtil.getPw();
 
 	@Override
 	public int doSendMail(MailDTO pDTO) {
