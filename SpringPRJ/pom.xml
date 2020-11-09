@@ -15,16 +15,29 @@
 
 	</properties>
 
-	<!-- 오라클에서 메이븐 저장소에 제공을 하고 있지 않기 때문에, 메이븐 사설 저장소 사용함 -->
 	<repositories>
+		<!-- 오라클에서 메이븐 저장소에 제공을 하고 있지 않기 때문에, 메이븐 사설 저장소 사용함 -->	
 		<repository>
 			<id>oracle</id>
 			<name>ORACLE JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
+		
+		<!-- 자연어처리-형태소분석기(Komoran 다운로드를 위한 레파지토리 등록) -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
+	
+		<!-- Komoran 3.3.4 -->
+		<dependency>
+			<groupId>com.github.shin285</groupId>
+			<artifactId>KOMORAN</artifactId>
+			<version>3.3.4</version>
+		</dependency>
 
 		<!-- RequestBody 사용시, JSON 변환이 안되는 경우 추가함 -->
 		<dependency>
