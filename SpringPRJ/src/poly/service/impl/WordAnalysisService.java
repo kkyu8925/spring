@@ -46,6 +46,10 @@ public class WordAnalysisService implements IWordAnalysisService {
 		this.nlp = new Komoran(DEFAULT_MODEL.LIGHT); // 학습데이터 경량화 버전(웹서비스에 적합)
 		//this.nlp = new Komoran(DEFAULT_MODEL.FULL); // 학습데이터 전체 버전(일괄처리:배치 서비스에 적합)
 		
+		// 데이터 사전 로딩하기
+		// 윈도우 운영체제의 파일은 C:\를 붙이지 않아도 C드라이브 인식
+		this.nlp.setUserDic("/myDic/wordDic.txt");
+		
 		log.info("톰켓이 부팅될때 스프링 프레임워크 자동 실행, 스프링 실행될때 nlp변수에 Komoran 객체를 생성하여 저장.");
 		
 		log.info(this.getClass().getName() + ".WordAnalysisService creator end");
@@ -136,8 +140,8 @@ public class WordAnalysisService implements IWordAnalysisService {
 	public Map<String, Integer> doWordAnalysis(String text) throws Exception {
 		
 		// 네이버 뉴스 내용을 가졍괴
-		String newContext = newsCollectService.doNaverNewsContents(
-				"https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=101&oid=001&aid=0011955578");
+		String newContext = "아이오아이는 최고의 아이돌이며, 여자연예인 중에 멋진 걸그룹이다.";
+				//newsCollectService.doNaverNewsContents("https://news.naver.com/main/read.nhn?mode=LSD&mid=sec&sid1=101&oid=001&aid=0011955578");
 		
 		// 문장의 명사를 추출하기 위한 형태소 분석 실행
 		List<String> rList = this.doWordNouns(newContext);
