@@ -4,3 +4,14 @@
 /SpringPRJ/target/
 /SpringPRJ/.classpath
 /SpringPRJ/WebContent/WEB-INF/classes/
+
+/SpringPRJ2/.settings/
+/SpringPRJ2/target/
+/SpringPRJ2/.classpath
+/SpringPRJ2/WebContent/WEB-INF/classes/
+/SpringPRJ2/src/poly/util/PrivateUtil.java
+
+/OpenApiPRJ/.settings/
+/OpenApiPRJ/target/
+/OpenApiPRJ/.classpath
+/OpenApiPRJ/WebContent/WEB-INF/classes/
