@@ -1,4 +1,4 @@
-# SpringMVC-Study
+# SpringPRJ
 
 ajax <br/>
 날씨 api <br/>
@@ -6,7 +6,7 @@ dart api<br/>
 네이버 뉴스 검색 api<br/>
 paging <br/>
 
-# SpringMVC-Study2
+# SpringPRJ2
 
 공지사항 게시판 <br/>
 메일발송 <br/>
