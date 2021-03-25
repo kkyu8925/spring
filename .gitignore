@@ -15,3 +15,9 @@
 /OpenApiPRJ/target/
 /OpenApiPRJ/.classpath
 /OpenApiPRJ/WebContent/WEB-INF/classes/
+
+/SpringPRJ3/.settings/
+/SpringPRJ3/target/
+/SpringPRJ3/.classpath
+/SpringPRJ3/WebContent/WEB-INF/classes/
+/SpringPRJ3/src/poly/util/PrivateUtil.java
