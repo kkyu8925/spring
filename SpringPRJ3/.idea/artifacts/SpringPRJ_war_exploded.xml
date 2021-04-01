@@ -14,6 +14,14 @@
           <element id="module-output" name="SpringPRJ" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.27.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.13" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.12.1" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.2" />
           <element id="library" level="project" name="Maven: org.apache.hadoop:hadoop-client:2.9.2" />
           <element id="library" level="project" name="Maven: org.apache.hadoop:hadoop-common:2.9.2" />
@@ -39,7 +47,6 @@
           <element id="library" level="project" name="Maven: org.apache.avro:avro:1.7.7" />
           <element id="library" level="project" name="Maven: com.thoughtworks.paranamer:paranamer:2.3" />
           <element id="library" level="project" name="Maven: org.xerial.snappy:snappy-java:1.0.5" />
-          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:2.5.0" />
           <element id="library" level="project" name="Maven: org.apache.hadoop:hadoop-auth:2.9.2" />
           <element id="library" level="project" name="Maven: com.nimbusds:nimbus-jose-jwt:4.41.1" />
           <element id="library" level="project" name="Maven: com.github.stephenc.jcip:jcip-annotations:1.0-1" />
@@ -112,7 +119,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.27.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.27.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.27.RELEASE" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
           <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" />
           <element id="library" level="project" name="Maven: junit:junit:4.10" />

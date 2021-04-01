@@ -16,5 +16,12 @@ public class MainController {
 		
 		return "/index";
 	}
+
+	@RequestMapping(value="tts")
+	public String Tts() {
+		log.info(this.getClass());
+
+		return "/TTS";
+	}
 			
 }
