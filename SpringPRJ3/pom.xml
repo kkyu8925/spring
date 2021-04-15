@@ -9,7 +9,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<!-- MongoDB에서 제공하는 스프링 버전과 연동을 위해 권장하는 버전인 4.2.9 버전으로 기존 4.3.7에서 다운그레이드함 -->
-		<org.springframework-version>4.3.27.RELEASE</org.springframework-version>
+		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -61,13 +61,6 @@
 			<version>4.2</version>
 		</dependency>
 
-		<!-- 하둡의 핵심 기술 연동을 위한 라이브러리 다운로드 -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
 		<!-- DTO를 맵으로 변환하기 위해 사용함 -->
 		<!-- redis value를 json형태로 표현하기 위해 추가 setValueSerializer(json) -->
 		<dependency>
@@ -101,7 +94,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
-			<version>2.0.14.RELEASE</version>
+			<version>1.9.11.RELEASE</version>
 		</dependency>
 
 
@@ -181,13 +174,6 @@
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
-		</dependency>
-
-		<!-- 하둡의 핵심 기술 연동을 위한 라이브러리 다운로드 -->
-		<dependency>
-			<groupId>org.apache.hadoop</groupId>
-			<artifactId>hadoop-client</artifactId>
-			<version>2.9.2</version>
 		</dependency>
 
 		<!-- 데이터 전송시, 문자 깨지는 현상을 방지하기 위한 BASE64 인코딩 사용할 라이브러리 추가 -->
