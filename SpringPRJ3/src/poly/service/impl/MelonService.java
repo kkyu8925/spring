@@ -13,6 +13,8 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import poly.dto.MelonDTO;
+import poly.dto.MelonSingerDTO;
+import poly.dto.MelonSongDTO;
 import poly.persistance.mongo.IMelonMapper;
 import poly.service.IMelonService;
 import poly.util.DateUtil;
@@ -31,8 +33,6 @@ public class MelonService implements IMelonService {
 
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".collectMelonRank Start!");
-
-        int res = 0;
 
         List<MelonDTO> pList = new ArrayList<>();
 
@@ -71,6 +71,7 @@ public class MelonService implements IMelonService {
         }
 
         String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // 생성할 컬렉션명
+
         // MongoDB Collection 생성하기
         melonMapper.createCollection(colNm);
 
@@ -88,7 +89,7 @@ public class MelonService implements IMelonService {
         log.info(this.getClass().getName() + ".getRank Start!");
 
         // 조회할 컬렉션 이름
-        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // 생성할 컬렉션명
+        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd");
 
         List<MelonDTO> rList = melonMapper.getRank(colNm);
 
@@ -97,6 +98,45 @@ public class MelonService implements IMelonService {
         }
 
         log.info(this.getClass().getName() + ".getRank End!");
+
+        return rList;
+    }
+
+    @Override
+    public List<MelonSongDTO> getSongForSinger() throws Exception {
+
+        log.info(this.getClass().getName() + ".getSongForSinger Start!");
+
+        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // 조회할 컬렉션명
+        String singer = "아이유"; // 조회할 가수
+
+        // 노래별 랭킹 비교결과 가져오기
+        List<MelonSongDTO> rList = melonMapper.getSongForSinger(colNm, singer);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        log.info(this.getClass().getName() + ".getSongForSinger End!");
+
+        return rList;
+    }
+
+    @Override
+    public List<MelonSingerDTO> getRankForSinger() throws Exception {
+
+        // 오늘의 랭킹 수집하기
+        this.collectMelonRank();
+
+        // 조회할 컬렉션 이름
+        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd");
+
+        // 가수별 랭키 가져오기
+        List<MelonSingerDTO> rList = melonMapper.getRankForSinger(colNm);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
 
         return rList;
     }
