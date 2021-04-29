@@ -34,7 +34,7 @@ public class MelonController {
      */
     @RequestMapping(value = "melon/collectMelonRank")
     @ResponseBody
-    public String collectMelonRank(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String collectMelonRank() throws Exception {
 
         log.info(this.getClass().getName() + ".collectMelonRank Start!");
 
@@ -43,6 +43,39 @@ public class MelonController {
         log.info(this.getClass().getName() + ".collectMelonRank End!");
 
         return "success";
+    }
+
+    /**
+     * 멜론 데이터 가져오는 일반 화면
+     */
+    @RequestMapping(value = "melon/melonTop100")
+    public String melonTop100() throws Exception {
+
+        log.info(this.getClass().getName() + ".melonTop100 Start!");
+
+        log.info(this.getClass().getName() + ".melonTop100 End!");
+
+        return "/melon/melonTop100";
+    }
+
+    /**
+     * 멜론 데이터 가져오기
+     */
+    @RequestMapping(value = "melon/getRank")
+    @ResponseBody
+    public List<MelonDTO> getRank() throws Exception {
+
+        log.info(this.getClass().getName() + ".getRank Start!");
+
+        List<MelonDTO> rList = melonService.getRank();
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        log.info(this.getClass().getName() + ".getRank End!");
+
+        return rList;
     }
 
 }

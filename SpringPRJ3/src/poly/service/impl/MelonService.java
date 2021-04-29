@@ -1,7 +1,6 @@
 package poly.service.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,33 +27,27 @@ public class MelonService implements IMelonService {
     private Logger log = Logger.getLogger(this.getClass());
 
     @Override
-    public int collectMelonRank() throws Exception {
+    public void collectMelonRank() throws Exception {
 
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".collectMelonRank Start!");
 
         int res = 0;
 
-        List<MelonDTO> pList = new ArrayList<MelonDTO>();
+        List<MelonDTO> pList = new ArrayList<>();
 
         // 멜론 Top100 중 50위까지 정보 가져오는 페이지
         String url = "https://www.melon.com/chart/day/index.htm";
 
         // JSOUP 라이브러리를 통해 사이트 접속되면, 그 사이트의 전체 HTML소스 저장할 변수
-        Document doc = null; //
+        Document doc;
 
         doc = Jsoup.connect(url).get();
 
         // <div class="service_list_song"> 이 태그 내에서 있는 HTML소스만 element에 저장됨
         Elements element = doc.select("div.service_list_song");
 
-        // Iterator을 사용하여 멜론 Top100의 50위까지 순위 정보를 가져오기
-        Iterator<Element> rank50List = element.select("tr.lst50").iterator(); // 멜론 50위까지 차크
-
-        // 순위는 1위부터 50위까지 수집되기 때문에 반복문을 통해 데이터 저장
-        while (rank50List.hasNext()) {
-
-            Element songInfo = rank50List.next();
+        for (Element songInfo : element.select("tr.lst50")) {
 
             // 크롤링을 통해 데이터 저장하기
             String rank = songInfo.select("span.rank").text(); // 순위
@@ -87,7 +80,25 @@ public class MelonService implements IMelonService {
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".collectMelonRank End!");
 
-        return res;
+    }
+
+    @Override
+    public List<MelonDTO> getRank() throws Exception {
+
+        log.info(this.getClass().getName() + ".getRank Start!");
+
+        // 조회할 컬렉션 이름
+        String colNm = "MelonTOP100_" + DateUtil.getDateTime("yyyyMMdd"); // 생성할 컬렉션명
+
+        List<MelonDTO> rList = melonMapper.getRank(colNm);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        log.info(this.getClass().getName() + ".getRank End!");
+
+        return rList;
     }
 
 }
