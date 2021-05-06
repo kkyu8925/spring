@@ -1,6 +1,5 @@
 package poly.service.impl;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 	private IMelonMapperUsingDTO melonMapper; // MongoDB에 저장할 Mapper
 
 	// 로그 파일 생성 및 로그 출력을 위한 log4j 프레임워크의 자바 객체
-	private Logger log = Logger.getLogger(this.getClass());
+	private final Logger log = Logger.getLogger(this.getClass());
 
 	@Override
 	public int collectMelonSong() throws Exception {
@@ -36,13 +35,13 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 
 		int res = 0;
 
-		List<MelonDTO> pList = new LinkedList<MelonDTO>();
+		List<MelonDTO> pList = new LinkedList<>();
 
 		// 멜론 Top100 중 50위까지 정보 가져오는 페이지
 		String url = "https://www.melon.com/chart/index.htm";
 
 		// JSOUP 라이브러리를 통해 사이트 접속되면, 그 사이트의 전체 HTML소스 저장할 변수
-		Document doc = null; //
+		Document doc = null;
 
 		doc = Jsoup.connect(url).get();
 
@@ -50,11 +49,8 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 		Elements element = doc.select("div.service_list_song");
 
 		// Iterator을 사용하여 멜론차트 정보를 가져오기
-		Iterator<Element> songList = element.select("div.wrap_song_info").iterator(); // 멜론 50위까지 차크
-
-		while (songList.hasNext()) {
-
-			Element songInfo = songList.next();
+		// 멜론 50위까지
+		for (Element songInfo : element.select("div.wrap_song_info")) {
 
 			// 크롤링을 통해 데이터 저장하기
 			String song = CmmUtil.nvl(songInfo.select("div.ellipsis.rank01 a").text()); // 노래
@@ -88,7 +84,7 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 		String colNm = "MELON_" + DateUtil.getDateTime("yyyyMMdd");
 
 		// MongoDB에 데이터저장하기
-		melonMapper.insertSong(pList, colNm);
+		res = melonMapper.insertSong(pList, colNm);
 
 		// 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
 		log.info(this.getClass().getName() + ".collectMelonSong End!");
@@ -106,7 +102,7 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 		List<MelonDTO> rList = melonMapper.getSongList(colNm);
 
 		if (rList == null) {
-			rList = new LinkedList<MelonDTO>();
+			rList = new LinkedList<>();
 		}
 
 		log.info(this.getClass().getName() + ".getSongList End!");
@@ -124,7 +120,7 @@ public class MelonServiceUsingDTO implements IMelonServiceUsingDTO {
 		List<MelonDTO> rList = melonMapper.getSingerSongCnt(colNm);
 
 		if (rList == null) {
-			rList = new LinkedList<MelonDTO>();
+			rList = new LinkedList<>();
 		}
 
 		log.info(this.getClass().getName() + ".getSingerSongCnt End!");

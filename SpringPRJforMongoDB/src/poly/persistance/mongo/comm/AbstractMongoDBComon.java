@@ -9,7 +9,7 @@ import com.mongodb.client.model.Indexes;
 public abstract class AbstractMongoDBComon {
 
 	// 로그 파일 생성 및 로그 출력을 위한 log4j 프레임워크의 자바 객체
-	private Logger log = Logger.getLogger(this.getClass());
+	private final Logger log = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private MongoTemplate mongodb;
@@ -28,8 +28,8 @@ public abstract class AbstractMongoDBComon {
 	/**
 	 * 인덱스 컬럼이 여러개일때 컬렉션 생성
 	 * 
-	 * @param 생성할 컬렉션명
-	 * @param 생성할 인덱스
+	 * @param colNm 컬렉션명
+	 * @param index 인덱스
 	 * @return 생성결과
 	 */
 	protected boolean createCollection(String colNm, String[] index) throws Exception {
