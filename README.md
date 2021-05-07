@@ -1,4 +1,4 @@
-# SpringPRJ
+# SpringPRJforAPI
 
 ajax <br/>
 날씨 api <br/>
@@ -6,7 +6,7 @@ dart api<br/>
 네이버 뉴스 검색 api<br/>
 paging <br/>
 
-# SpringPRJ2
+# SpringPRJforRDB
 
 공지사항 게시판 <br/>
 메일발송 <br/>
@@ -19,7 +19,12 @@ RestAPI<br/>
 자연어처리(형태소분석)<br/>
 데이터 사전 만들기 <br/>
 
-# SpringPRJ3
+# SpringPRJforNoSQL
 
 redis <br/>
-mongoDB - 멜론차트 크롤링
+mongoDB 1.x- 멜론차트 크롤링 <br/>
+
+# SpringPRJforMongoDB
+
+mongoDB 2.x- 멜론차트 크롤링 <br/>
+
