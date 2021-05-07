@@ -25,172 +25,158 @@ import poly.util.CmmUtil;
 @Component("MelonMapper")
 public class MelonMapper extends AbstractMongoDBComon implements IMelonMapper {
 
-	@Autowired
-	private MongoTemplate mongodb;
+    @Autowired
+    private MongoTemplate mongodb;
 
-	private Logger log = Logger.getLogger(this.getClass());
+    private final Logger log = Logger.getLogger(this.getClass());
 
-	@Override
-	public int insertSong(List<Map<String, Object>> pList, String colNm) throws Exception {
+    @Override
+    public int insertSong(List<Map<String, Object>> pList, String colNm) throws Exception {
 
-		log.info(this.getClass().getName() + ".insertSong Start!");
+        log.info(this.getClass().getName() + ".insertSong Start!");
 
-		int res = 0;
+        int res = 0;
 
-		if (pList == null) {
-			pList = new LinkedList<Map<String, Object>>();
-		}
+        if (pList == null) {
+            pList = new LinkedList<>();
+        }
 
-		// 데이터를 저장할 컬렉션 생성
-		super.createCollection(colNm, "collectTime");
+        // 데이터를 저장할 컬렉션 생성
+        super.createCollection(colNm, "collectTime");
 
-		// 저장할 컬렉션 객체 생성
-		MongoCollection<Document> col = mongodb.getCollection(colNm);
+        // 저장할 컬렉션 객체 생성
+        MongoCollection<Document> col = mongodb.getCollection(colNm);
 
-		Iterator<Map<String, Object>> it = pList.iterator();
+        for (Map<String, Object> pMap : pList) {
+            if (pMap == null) {
+                pMap = new LinkedHashMap<>();
+            }
 
-		while (it.hasNext()) {
-			Map<String, Object> pMap = it.next();
+            // 레코드 한개씩 저장하기
+            col.insertOne(new Document(pMap));
 
-			if (pMap == null) {
-				pMap = new LinkedHashMap<String, Object>();
-			}
+        }
 
-			// 레코드 한개씩 저장하기
-			col.insertOne(new Document(pMap));
+        col = null;
 
-		}
+        res = 1;
 
-		col = null;
+        log.info(this.getClass().getName() + ".insertSong End!");
 
-		res = 1;
+        return res;
+    }
 
-		log.info(this.getClass().getName() + ".insertSong End!");
+    @Override
+    public List<Map<String, String>> getSongList(String colNm) throws Exception {
 
-		return res;
-	}
+        log.info(this.getClass().getName() + ".getSongList Start!");
 
-	@Override
-	public List<Map<String, String>> getSongList(String colNm) throws Exception {
+        // 조회 결과를 전달하기 위한 객체 생성하기
+        List<Map<String, String>> rList = new LinkedList<Map<String, String>>();
 
-		log.info(this.getClass().getName() + ".getSongList Start!");
+        MongoCollection<Document> col = mongodb.getCollection(colNm);
 
-		// 조회 결과를 전달하기 위한 객체 생성하기
-		List<Map<String, String>> rList = new LinkedList<Map<String, String>>();
+        // 조회 결과 중 출력할 컬럼들(SQL의 SELECT절과 FROM절 가운데 컬럼들과 유사함)
+        Document projection = new Document();
+        projection.append("song", "$song");
+        projection.append("singer", "$singer");
 
-		MongoCollection<Document> col = mongodb.getCollection(colNm);
+        // MongoDB는 무조건 ObjectId가 자동생성되며, ObjectID는 사용하지 않을때, 조회할 필요가 없음
+        // ObjectId를 가지고 오지 않을 때 사용함
+        projection.append("_id", 0);
 
-		// 조회 결과 중 출력할 컬럼들(SQL의 SELECT절과 FROM절 가운데 컬럼들과 유사함)
-		Document projection = new Document();
-		projection.append("song", "$song");
-		projection.append("singer", "$singer");
+        // MongoDB의 find 명령어를 통해 조회할 경우 사용함
+        // 조회하는 데이터의 양이 적은 경우, find를 사용하고, 데이터양이 많은 경우 무조건 Aggregate 사용한다.
+        FindIterable<Document> rs = col.find(new Document()).projection(projection);
 
-		// MongoDB는 무조건 ObjectId가 자동생성되며, ObjectID는 사용하지 않을때, 조회할 필요가 없음
-		// ObjectId를 가지고 오지 않을 때 사용함
-		projection.append("_id", 0);
+        for (Document doc : rs) {
+            if (doc == null) {
+                doc = new Document();
 
-		// MongoDB의 find 명령어를 통해 조회할 경우 사용함
-		// 조회하는 데이터의 양이 적은 경우, find를 사용하고, 데이터양이 많은 경우 무조건 Aggregate 사용한다.
-		FindIterable<Document> rs = col.find(new Document()).projection(projection);
+            }
 
-		// 저장 결과를 제어가능한 구조인 Iterator로 변경하기 위해 사용함
-		Iterator<Document> cursor = rs.iterator();
+            // 조회 잘되나 출력해 봄
+            String song = CmmUtil.nvl(doc.getString("song"));
+            String singer = CmmUtil.nvl(doc.getString("singer"));
 
-		while (cursor.hasNext()) {
-			Document doc = cursor.next();
+            log.info("song : " + song);
+            log.info("singer : " + singer);
 
-			if (doc == null) {
-				doc = new Document();
+            Map<String, String> rMap = new LinkedHashMap<>();
 
-			}
+            rMap.put("song", song);
+            rMap.put("singer", singer);
 
-			// 조회 잘되나 출력해 봄
-			String song = CmmUtil.nvl(doc.getString("song"));
-			String singer = CmmUtil.nvl(doc.getString("singer"));
+            // 레코드 결과를 List에 저장하기
+            rList.add(rMap);
 
-			log.info("song : " + song);
-			log.info("singer : " + singer);
+            rMap = null;
+            doc = null;
+        }
 
-			Map<String, String> rMap = new LinkedHashMap<String, String>();
+        // 사용이 완료된 객체는 메모리에서 강제로 비우기
+        rs = null;
+        col = null;
 
-			rMap.put("song", song);
-			rMap.put("singer", singer);
+        projection = null;
 
-			// 레코드 결과를 List에 저장하기
-			rList.add(rMap);
+        log.info(this.getClass().getName() + ".getSongList End!");
 
-			rMap = null;
-			doc = null;
-		}
+        return rList;
+    }
 
-		// 사용이 완료된 객체는 메모리에서 강제로 비우기
-		cursor = null;
-		rs = null;
-		col = null;
+    @Override
+    public List<Map<String, Object>> getSingerSongCnt(String colNm) throws Exception {
 
-		projection = null;
+        log.info(this.getClass().getName() + ".getSingerSongCnt Start!");
 
-		log.info(this.getClass().getName() + ".getSongList End!");
+        // 조회 결과를 전달하기 위한 객체 생성하기
+        List<Map<String, Object>> rList = new LinkedList<Map<String, Object>>();
 
-		return rList;
-	}
+        // MongoDB 조회 쿼리
+        List<? extends Bson> pipeline = Arrays.asList(
+                new Document().append("$group",
+                        new Document().append("_id", new Document().append("singer", "$singer")).append("COUNT(singer)",
+                                new Document().append("$sum", 1))),
+                new Document()
+                        .append("$project",
+                                new Document().append("singer", "$_id.singer").append("singerCnt", "$COUNT(singer)")
+                                        .append("_id", 0)),
+                new Document().append("$sort", new Document().append("singerCnt", 1)));
 
-	@Override
-	public List<Map<String, Object>> getSingerSongCnt(String colNm) throws Exception {
+        MongoCollection<Document> col = mongodb.getCollection(colNm);
+        AggregateIterable<Document> rs = col.aggregate(pipeline).allowDiskUse(true);
 
-		log.info(this.getClass().getName() + ".getSingerSongCnt Start!");
+        for (Document doc : rs) {
 
-		// 조회 결과를 전달하기 위한 객체 생성하기
-		List<Map<String, Object>> rList = new LinkedList<Map<String, Object>>();
+            if (doc == null) {
+                doc = new Document();
+            }
 
-		// MongoDB 조회 쿼리
-		List<? extends Bson> pipeline = Arrays.asList(
-				new Document().append("$group",
-						new Document().append("_id", new Document().append("singer", "$singer")).append("COUNT(singer)",
-								new Document().append("$sum", 1))),
-				new Document()
-						.append("$project",
-								new Document().append("singer", "$_id.singer").append("singerCnt", "$COUNT(singer)")
-										.append("_id", 0)),
-				new Document().append("$sort", new Document().append("singerCnt", 1)));
+            String singer = doc.getString("singer");
+            int singerCnt = doc.getInteger("singerCnt", 0);
 
-		MongoCollection<Document> col = mongodb.getCollection(colNm);
-		AggregateIterable<Document> rs = col.aggregate(pipeline).allowDiskUse(true);
-		Iterator<Document> cursor = rs.iterator();
+            log.info("singer : " + singer);
+            log.info("singerCnt : " + singerCnt);
 
-		while (cursor.hasNext()) {
+            Map<String, Object> rMap = new LinkedHashMap<String, Object>();
 
-			Document doc = cursor.next();
+            rMap.put("singer", singer);
+            rMap.put("singerCnt", singerCnt);
 
-			if (doc == null) {
-				doc = new Document();
-			}
+            rList.add(rMap);
 
-			String singer = doc.getString("singer");
-			int singerCnt = doc.getInteger("singerCnt", 0);
+            rMap = null;
+            doc = null;
+        }
 
-			log.info("singer : " + singer);
-			log.info("singerCnt : " + singerCnt);
+        rs = null;
+        col = null;
+        pipeline = null;
 
-			Map<String, Object> rMap = new LinkedHashMap<String, Object>();
+        log.info(this.getClass().getName() + ".getSingerSongCnt End!");
 
-			rMap.put("singer", singer);
-			rMap.put("singerCnt", singerCnt);
-
-			rList.add(rMap);
-
-			rMap = null;
-			doc = null;
-		}
-
-		cursor = null;
-		rs = null;
-		col = null;
-		pipeline = null;
-
-		log.info(this.getClass().getName() + ".getSingerSongCnt End!");
-
-		return rList;
-	}
+        return rList;
+    }
 
 }

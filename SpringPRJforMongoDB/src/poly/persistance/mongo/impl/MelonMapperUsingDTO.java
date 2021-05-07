@@ -33,7 +33,7 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
 
         log.info(this.getClass().getName() + ".insertSong Start!");
 
-        int res = 0;
+        int res;
 
         if (pList == null) {
             pList = new LinkedList<>();
