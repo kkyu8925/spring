@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import poly.dto.MelonDTO;
-import poly.persistance.mongo.IMelonMapperUsingDTO;
+import poly.persistence.mongo.IMelonMapperUsingDTO;
 import poly.service.IMelonServiceUsingDTO;
 import poly.util.CmmUtil;
 import poly.util.DateUtil;

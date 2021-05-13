@@ -1,8 +1,10 @@
-package poly.persistance.mongo.impl;
+package poly.persistence.mongo.impl;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.bson.Document;
@@ -15,13 +17,12 @@ import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
-import poly.dto.MelonDTO;
-import poly.persistance.mongo.IMelonMapperUsingDTO;
-import poly.persistance.mongo.comm.AbstractMongoDBComon;
+import poly.persistence.mongo.IMelonMapper;
+import poly.persistence.mongo.comm.AbstractMongoDBComon;
 import poly.util.CmmUtil;
 
-@Component("MelonMapperUsingDTO")
-public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonMapperUsingDTO {
+@Component("MelonMapper")
+public class MelonMapper extends AbstractMongoDBComon implements IMelonMapper {
 
     @Autowired
     private MongoTemplate mongodb;
@@ -29,48 +30,30 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
     private final Logger log = Logger.getLogger(this.getClass());
 
     @Override
-    public int insertSong(List<MelonDTO> pList, String colNm) throws Exception {
+    public int insertSong(List<Map<String, Object>> pList, String colNm) throws Exception {
 
         log.info(this.getClass().getName() + ".insertSong Start!");
 
-        int res;
+        int res = 0;
 
         if (pList == null) {
             pList = new LinkedList<>();
         }
 
         // 데이터를 저장할 컬렉션 생성
-        // 추상화클래스에 정의한 함수 호출
         super.createCollection(colNm, "collectTime");
 
         // 저장할 컬렉션 객체 생성
         MongoCollection<Document> col = mongodb.getCollection(colNm);
 
-        for (MelonDTO rDTO : pList) {
-
-            if (rDTO == null) {
-                rDTO = new MelonDTO();
+        for (Map<String, Object> pMap : pList) {
+            if (pMap == null) {
+                pMap = new LinkedHashMap<>();
             }
 
-            String collectTime = CmmUtil.nvl(rDTO.getCollectTime());
-            String song = CmmUtil.nvl(rDTO.getSong());
-            String singer = CmmUtil.nvl(rDTO.getSinger());
-
-            log.info("collectTime : " + collectTime);
-            log.info("song : " + song);
-            log.info("singer : " + singer);
-
-            // 2.xx 버전의 MongoDB 저장은 Document 단위로 구성됨
-            Document doc = new Document();
-
-            doc.append("collectTime", collectTime);
-            doc.append("song", song);
-            doc.append("singer", singer);
-
             // 레코드 한개씩 저장하기
-            col.insertOne(doc);
+            col.insertOne(new Document(pMap));
 
-            doc = null;
         }
 
         col = null;
@@ -83,12 +66,12 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
     }
 
     @Override
-    public List<MelonDTO> getSongList(String colNm) throws Exception {
+    public List<Map<String, String>> getSongList(String colNm) throws Exception {
 
         log.info(this.getClass().getName() + ".getSongList Start!");
 
         // 조회 결과를 전달하기 위한 객체 생성하기
-        List<MelonDTO> rList = new LinkedList<>();
+        List<Map<String, String>> rList = new LinkedList<Map<String, String>>();
 
         MongoCollection<Document> col = mongodb.getCollection(colNm);
 
@@ -106,9 +89,9 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
         FindIterable<Document> rs = col.find(new Document()).projection(projection);
 
         for (Document doc : rs) {
-
             if (doc == null) {
                 doc = new Document();
+
             }
 
             // 조회 잘되나 출력해 봄
@@ -118,21 +101,22 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
             log.info("song : " + song);
             log.info("singer : " + singer);
 
-            MelonDTO rDTO = new MelonDTO();
+            Map<String, String> rMap = new LinkedHashMap<>();
 
-            rDTO.setSong(song);
-            rDTO.setSinger(singer);
+            rMap.put("song", song);
+            rMap.put("singer", singer);
 
             // 레코드 결과를 List에 저장하기
-            rList.add(rDTO);
+            rList.add(rMap);
 
-            rDTO = null;
+            rMap = null;
             doc = null;
         }
 
         // 사용이 완료된 객체는 메모리에서 강제로 비우기
         rs = null;
         col = null;
+
         projection = null;
 
         log.info(this.getClass().getName() + ".getSongList End!");
@@ -141,12 +125,12 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
     }
 
     @Override
-    public List<MelonDTO> getSingerSongCnt(String colNm) throws Exception {
+    public List<Map<String, Object>> getSingerSongCnt(String colNm) throws Exception {
 
         log.info(this.getClass().getName() + ".getSingerSongCnt Start!");
 
         // 조회 결과를 전달하기 위한 객체 생성하기
-        List<MelonDTO> rList = new LinkedList<>();
+        List<Map<String, Object>> rList = new LinkedList<Map<String, Object>>();
 
         // MongoDB 조회 쿼리
         List<? extends Bson> pipeline = Arrays.asList(
@@ -174,15 +158,14 @@ public class MelonMapperUsingDTO extends AbstractMongoDBComon implements IMelonM
             log.info("singer : " + singer);
             log.info("singerCnt : " + singerCnt);
 
-            MelonDTO rDTO = new MelonDTO();
+            Map<String, Object> rMap = new LinkedHashMap<String, Object>();
 
-            rDTO.setSinger(singer);
-            rDTO.setSingerCnt(singerCnt);
-            rDTO.setSinger(singer);
+            rMap.put("singer", singer);
+            rMap.put("singerCnt", singerCnt);
 
-            rList.add(rDTO);
+            rList.add(rMap);
 
-            rDTO = null;
+            rMap = null;
             doc = null;
         }
 
