@@ -4,5 +4,10 @@
       "name": "loggin.level.org.springframework",
       "type": "java.lang.String",
       "description": "Description for loggin.level.org.springframework."
-  }
-] }
+    },
+    {
+      "name": "management.endpoint.web.exposure.include",
+      "type": "java.lang.String",
+      "description": "Description for management.endpoint.web.exposure.include."
+    }
+  ] }
