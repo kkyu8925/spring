@@ -1,3 +1,6 @@
+# core
+- 인프런 : 스프링 핵심 원리 - 기본편
+
 # restful-web-service
 - 인프런 : Spring Boot를 이용한 RESTful Web Services 개발
 
