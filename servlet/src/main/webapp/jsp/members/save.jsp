@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="hello.servlet.domain.member.Member" %>
-<%@ page import="hello.servlet.domain.member.MemberRepository" %>
+<%@ page import="spring.servlet.domain.member.Member" %>
+<%@ page import="spring.servlet.domain.member.MemberRepository" %>
 <%
     //request, response 사용 가능
     MemberRepository memberRepository = MemberRepository.getInstance();
