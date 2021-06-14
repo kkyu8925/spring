@@ -1,4 +1,4 @@
-# core
+# woowahan
 - 인프런 로드맵 : 우아한형제들 개발팀장 김영한의 스프링 완전 정복
 
 # restful-web-service
