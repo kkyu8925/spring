@@ -1,5 +1,5 @@
 # core
-- 인프런 : 스프링 핵심 원리 - 기본편
+- 인프런 로드맵 : 우아한형제들 개발팀장 김영한의 스프링 완전 정복
 
 # restful-web-service
 - 인프런 : Spring Boot를 이용한 RESTful Web Services 개발
