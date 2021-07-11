@@ -11,10 +11,11 @@ import spring.core.order.OrderService;
 public class OrderApp {
 
     public static void main(String[] args) {
-
+//        1. 추상화와 구현체 둘 다 의존하는 방법. / DIP, OCP 위반
 //        MemberService memberService = new MemberServiceImpl();
 //        OrderService orderService = new OrderServiceImpl();
 
+//        2. AppConfig 으로 생성자 주입
 //        AppConfig appConfig = new AppConfig();
 //        MemberService memberService = appConfig.memberService();
 //        OrderService orderService = appConfig.orderService();

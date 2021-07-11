@@ -9,9 +9,10 @@ import spring.core.member.MemberService;
 public class MemberApp {
 
     public static void main(String[] args) {
-
+//        1. 추상화와 구현체 둘 다 의존하는 방법. / DIP, OCP 위반
 //        MemberServiceImpl memberService = new MemberServiceImpl();
 
+//        2. AppConfig 으로 생성자 주입
 //        AppConfig appConfig = new AppConfig();
 //        MemberService memberService = appConfig.memberService();
 
