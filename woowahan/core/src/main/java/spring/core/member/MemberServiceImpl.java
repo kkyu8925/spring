@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService {
     // 생성자 주입
     private final MemberRepository memberRepository;
 
-    @Autowired
+    @Autowired // 컴포넌트 스캔 시 DI
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

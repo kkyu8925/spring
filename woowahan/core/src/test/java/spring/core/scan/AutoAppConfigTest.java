@@ -1,6 +1,5 @@
 package spring.core.scan;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import spring.core.AutoAppConfig;
