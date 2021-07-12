@@ -14,13 +14,13 @@ import spring.core.order.OrderServiceImpl;
 @Configuration
 public class AppConfig {
 
-    @Bean
+    @Bean // 기본적으로 메서드 이름으로 등록
     public MemberService memberService() {
         System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
-    @Bean
+    @Bean(name="memberRepository") // 빈 이름 변경
     public MemberRepository memberRepository() {
         System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
