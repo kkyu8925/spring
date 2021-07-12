@@ -1,3 +1,7 @@
+// 1. 스프링 컨테이너에 빈 등록(생성)
+// 2. 의존관계 주입(DI)
+// 스프링은 빈을 생성하고, 의존관계 주입하는 단계가 나누어져 있다.
+// 그런데 이렇게 자바 코드로 스프링 빈을 등록하면 생성자를 호출하면서 의존관계 주입도 한번에 처리된다.
 package spring.core;
 
 import org.springframework.context.annotation.Bean;
@@ -20,7 +24,7 @@ public class AppConfig {
         return new MemberServiceImpl(memberRepository());
     }
 
-    @Bean(name="memberRepository") // 빈 이름 변경
+    @Bean(name = "memberRepository") // 빈 이름 변경
     public MemberRepository memberRepository() {
         System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
