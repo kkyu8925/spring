@@ -15,7 +15,8 @@ import spring.core.member.MemoryMemberRepository;
 import spring.core.order.OrderService;
 import spring.core.order.OrderServiceImpl;
 
-@Configuration
+@Configuration // 싱글톤을 보장하기위해 바이트코드 조작 기술인 CGLIB 를 사용한다.
+// @Bean 이 호출하는 메서드의 빈이 존재하면 존재하는 빈을 반환, 없으면 등록하고 반환하는 코드가 동적으로 만들어짐
 public class AppConfig {
 
     @Bean // 기본적으로 메서드 이름으로 등록

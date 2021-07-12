@@ -31,6 +31,10 @@ public class SingleTonTest {
     @Test
     @DisplayName("싱글톤 패턴을 적용 객체 사용")
     void singletonServiceTest() {
+
+//        싱글톤 패턴을 적용하기 위해 private 생성자를 사용했기 때문에 컴파일 오류 발생
+//        new SingleTonService();
+
         SingletonService instance1 = SingletonService.getInstance();
         SingletonService instance2 = SingletonService.getInstance();
 
@@ -45,7 +49,6 @@ public class SingleTonTest {
         MemberService memberService1 = ac.getBean("memberService", MemberService.class);
         MemberService memberService2 = ac.getBean("memberService", MemberService.class);
 
-        // 참조값이 다른 것을 확인
         System.out.println("memberService1 = " + memberService1);
         System.out.println("memberService2 = " + memberService2);
 
