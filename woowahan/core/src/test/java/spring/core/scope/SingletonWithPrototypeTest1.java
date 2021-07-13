@@ -28,8 +28,8 @@ public class SingletonWithPrototypeTest1 {
 
     @Test
     void singletonClientUsePrototype() {
+        // 처음에 싱글톤이 생성될 때 필요한 프로토타입 하나를 주입받아 사용한다.
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class, PrototypeBean.class);
-
 
         ClientBean clientBean1 = ac.getBean(ClientBean.class);
         int count1 = clientBean1.logic();
@@ -38,12 +38,11 @@ public class SingletonWithPrototypeTest1 {
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
         assertThat(count2).isEqualTo(1);
-
     }
 
 //    @Scope("singleton")
 //    static class ClientBean {
-//        private final PrototypeBean prototypeBean;
+//        private final PrototypeBean prototypeBean; // 생성시점에 프로토타입 주입
 //
 //        @Autowired
 //        public ClientBean(PrototypeBean prototypeBean) {
@@ -61,11 +60,11 @@ public class SingletonWithPrototypeTest1 {
     static class ClientBean {
 
         @Autowired
-//        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
-        private Provider<PrototypeBean> prototypeBeanProvider;
+//        private ObjectProvider<PrototypeBean> prototypeBeanProvider; // 옛날 방식
+        private Provider<PrototypeBean> prototypeBeanProvider; // 편의 기능 제공
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeBeanProvider.get();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get(); // 호출 시 컨테이너를 통해 해당 빈을 찾아서 반환(DL, Dependency Lookup)
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
@@ -75,7 +74,6 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("prototype")
     static class PrototypeBean {
-
         private int count = 0;
 
         public void addCount() {
@@ -92,8 +90,8 @@ public class SingletonWithPrototypeTest1 {
         }
 
         @PreDestroy
-        public void destory() {
-            System.out.println("PrototypeBean.destory");
+        public void destroy() {
+            System.out.println("PrototypeBean.destroy");
         }
     }
 }

@@ -9,8 +9,8 @@ import spring.core.common.MyLogger;
 @RequiredArgsConstructor
 class LogDemoService {
 
+        private final MyLogger myLogger;
 //    private final ObjectProvider<MyLogger> myLoggerProvider;
-    private final MyLogger myLogger;
 
     public void logic(String id) {
 //        MyLogger myLogger = myLoggerProvider.getObject();
