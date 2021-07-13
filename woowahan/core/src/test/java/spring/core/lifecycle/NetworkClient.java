@@ -14,6 +14,7 @@ public class NetworkClient {
 
     public NetworkClient() {
         System.out.println("생성자 호출, url = " + url);
+//        setUrl() 하기 전에 생성자가 먼저 호출되기 때문에 null
 //        connect();
 //        call("초기화 연결 메시지");
     }
@@ -31,12 +32,12 @@ public class NetworkClient {
         System.out.println("Call: " + url + " mes = " + mes);
     }
 
-    //  서비스 종료 시 호출
+    // 서비스 종료 시 호출
     public void disconnect() {
         System.out.println("close: " + url);
     }
 
-//    // DI 끝나면 실행행
+//    // DI 끝나면 실행
 //   @Override
 //    public void afterPropertiesSet() throws Exception {
 //       System.out.println("NetworkClient.afterPropertiesSet");
@@ -50,15 +51,15 @@ public class NetworkClient {
 //        disconnect();
 //    }
 
-    // DI 끝나면 실행행
-    @PostConstruct
+    // DI 끝나면 실행
+    @PostConstruct // javax 패키지에서 제공, 권장하는 방법
     public void init() {
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @PreDestroy
+    @PreDestroy // javax 패키지에서 제공, 권장하는 방법
     public void close() {
         System.out.println("NetworkClient.close");
         disconnect();
