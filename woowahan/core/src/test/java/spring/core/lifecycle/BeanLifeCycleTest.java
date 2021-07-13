@@ -17,8 +17,8 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
-
-//        @Bean(initMethod = "init", destroyMethod = "close") // 외부 라이브러리를 초기화, 종료 할 때 사용
+        // @Bean(initMethod = "init", destroyMethod = "close")
+        // 외부 라이브러리를 초기화, 종료 할 때 사용, destroyMethod 는 close, shutdown 을 추론하여 실행시켜준다. > 추론을 사용하기 싫다면 destroyMethod = ""
         @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
