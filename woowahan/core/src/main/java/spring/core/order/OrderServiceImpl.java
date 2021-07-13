@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private final DiscountPolicy discountPolicy;
 
 //    @RequiredArgsConstructor
-//    @Autowired // 컴포넌트 스캔 시 DI
+//    @Autowired // 컴포넌트 스캔 시 DI,  생성자가 하나만 있을 때 @Autowired 생략가능
 //    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
 //        this.memberRepository = memberRepository;
 //        this.discountPolicy = discountPolicy;
