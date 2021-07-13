@@ -8,7 +8,7 @@ import spring.core.member.Member;
 import spring.core.member.MemberRepository;
 
 @Component // default : orderServiceImpl 으로 빈 등록
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final 이 붙은 필드들의 생성자를 만들어준다. / 생성자가 하나이면 @Autowired 생략 가능 하기 때문에
 public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -19,7 +19,6 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-//    @RequiredArgsConstructor
 //    @Autowired // 컴포넌트 스캔 시 DI,  생성자가 하나만 있을 때 @Autowired 생략가능
 //    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
 //        this.memberRepository = memberRepository;
