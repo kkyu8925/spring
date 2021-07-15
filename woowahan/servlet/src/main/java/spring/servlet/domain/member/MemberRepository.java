@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class MemberRepository {
 
-    private static Map<Long, Member> store = new HashMap<>(); //static 사용
-    private static long sequence = 0L; //static 사용
+    private static Map<Long, Member> store = new HashMap<>();
+    private static long sequence = 0L;
 
     private static final MemberRepository instance = new MemberRepository();
 
