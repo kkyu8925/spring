@@ -12,12 +12,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
 @WebServlet(name = "memberListServlet", urlPatterns = "/servlet/members")
 public class MemberListServlet extends HttpServlet {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html");
@@ -54,6 +56,7 @@ public class MemberListServlet extends HttpServlet {
             w.write(" <td>" + member.getAge() + "</td>");
             w.write(" </tr>");
         }
+
         w.write(" </tbody>");
         w.write("</table>");
         w.write("</body>");
