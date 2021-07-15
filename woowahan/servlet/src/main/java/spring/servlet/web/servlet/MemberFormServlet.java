@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 
 // 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
 // HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
-@WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/newform")
+@WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/new-form")
 public class MemberFormServlet extends HttpServlet {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
