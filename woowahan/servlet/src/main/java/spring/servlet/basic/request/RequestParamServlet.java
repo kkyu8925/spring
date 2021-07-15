@@ -11,18 +11,19 @@ import java.util.Enumeration;
 /**
  * 1. 파라미터 전송 기능
  * http://localhost:8080/request-param?username=hello&age=20
- *
  */
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
 @WebServlet(name = "requestParamServlet", urlPatterns = "/request-param")
 public class RequestParamServlet extends HttpServlet {
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println("[전체 파라미터 조회] - start");
 
-//        request.getParameterNames().asIterator()
-//                .forEachRemaining(paramName -> System.out.println(paramName + "=" + request.getParameter(paramName)));
+        request.getParameterNames().asIterator()
+                .forEachRemaining(paramName -> System.out.println(paramName + "=" + request.getParameter(paramName)));
 
         System.out.println("[전체 파라미터 조회] - end");
         System.out.println();
