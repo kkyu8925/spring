@@ -13,8 +13,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontControllerServletV1", urlPatterns = "/frontcontroller/v1/*")
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
+@WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*")
 public class FrontControllerServletV1 extends HttpServlet {
+
     private Map<String, ControllerV1> controllerMap = new HashMap<>();
 
     public FrontControllerServletV1() {
@@ -23,15 +26,19 @@ public class FrontControllerServletV1 extends HttpServlet {
         controllerMap.put("/front-controller/v1/members", new MemberListControllerV1());
     }
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         System.out.println("FrontControllerServletV1.service");
-        String requestURI = request.getRequestURI();
+
+        String requestURI = request.getRequestURI(); // key
+
         ControllerV1 controller = controllerMap.get(requestURI);
         if (controller == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404
             return;
         }
+
         controller.process(request, response);
     }
 }
