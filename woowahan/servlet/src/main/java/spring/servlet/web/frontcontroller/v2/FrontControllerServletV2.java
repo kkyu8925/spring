@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
 @WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")
 public class FrontControllerServletV2 extends HttpServlet {
 
@@ -25,7 +27,7 @@ public class FrontControllerServletV2 extends HttpServlet {
         controllerMap.put("/front-controller/v2/members", new MemberListControllerV2());
     }
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String requestURI = request.getRequestURI();
@@ -36,6 +38,10 @@ public class FrontControllerServletV2 extends HttpServlet {
             return;
         }
 
+//        v1
+//        controller.process(request, response);
+
+//        v2
         MyView view = controller.process(request, response);
         view.render(request, response);
     }
