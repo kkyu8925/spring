@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
 @WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
@@ -26,7 +28,7 @@ public class FrontControllerServletV3 extends HttpServlet {
         controllerMap.put("/front-controller/v3/members", new MemberListControllerV3());
     }
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String requestURI = request.getRequestURI();
@@ -52,8 +54,8 @@ public class FrontControllerServletV3 extends HttpServlet {
 
     private Map<String, String> createParamMap(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<>();
-//        request.getParameterNames().asIterator()
-//                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
+        request.getParameterNames().asIterator()
+                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
         return paramMap;
     }
 }
