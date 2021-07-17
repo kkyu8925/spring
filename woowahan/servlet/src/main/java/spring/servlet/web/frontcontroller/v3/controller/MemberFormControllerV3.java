@@ -1,7 +1,6 @@
 package spring.servlet.web.frontcontroller.v3.controller;
 
 import spring.servlet.web.frontcontroller.ModelView;
-import spring.servlet.web.frontcontroller.MyView;
 import spring.servlet.web.frontcontroller.v3.ControllerV3;
 
 import java.util.Map;

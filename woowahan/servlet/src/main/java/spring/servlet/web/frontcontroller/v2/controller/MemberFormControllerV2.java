@@ -3,7 +3,6 @@ package spring.servlet.web.frontcontroller.v2.controller;
 import spring.servlet.web.frontcontroller.MyView;
 import spring.servlet.web.frontcontroller.v2.ControllerV2;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

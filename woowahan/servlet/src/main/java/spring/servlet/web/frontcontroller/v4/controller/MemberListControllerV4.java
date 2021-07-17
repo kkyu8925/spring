@@ -13,8 +13,15 @@ public class MemberListControllerV4 implements ControllerV4 {
 
     @Override
     public String process(Map<String, String> paramMap, Map<String, Object> model) {
+
         List<Member> members = memberRepository.findAll();
 
+        // v3
+//        ModelView mv = new ModelView("members");
+//        mv.getModel().put("members", members);
+//        return mv;
+
+        // v4
         model.put("members", members);
         return "members";
     }
