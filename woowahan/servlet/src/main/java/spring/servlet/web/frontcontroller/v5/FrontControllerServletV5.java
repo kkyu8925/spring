@@ -5,6 +5,7 @@ import spring.servlet.web.frontcontroller.MyView;
 import spring.servlet.web.frontcontroller.v3.controller.MemberFormControllerV3;
 import spring.servlet.web.frontcontroller.v3.controller.MemberListControllerV3;
 import spring.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
+import spring.servlet.web.frontcontroller.v4.ControllerV4;
 import spring.servlet.web.frontcontroller.v4.controller.MemberFormControllerV4;
 import spring.servlet.web.frontcontroller.v4.controller.MemberListControllerV4;
 import spring.servlet.web.frontcontroller.v4.controller.MemberSaveControllerV4;
@@ -22,9 +23,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// 톰켓이 실행되면 서블릿 컨테이너에 서블릿을 싱글톤으로 생성함.
+// HTTP 요청을 통해 매핑된 URL 호출되면 서블릿의 service 메서드 실행
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServletV5 extends HttpServlet {
 
+    // v4
+//    private Map<String, ControllerV4> controllerMap = new HashMap<>();
+
+    // v5
     private final Map<String, Object> handlerMappingMap = new HashMap<>();
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
 
@@ -38,7 +45,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
 
-        //V4 추가
+        // v4
         handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
@@ -49,7 +56,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 
-    @Override
+    @Override // HttpServletRequest, HttpServletResponse 객체는 HTTP 요청이 오면 WAS 가 만들어서 실행할 때 넣어줌
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Object handler = getHandler(request);
@@ -66,7 +73,6 @@ public class FrontControllerServletV5 extends HttpServlet {
         MyView view = viewResolver(viewName);
 
         view.render(mv.getModel(), request, response);
-
     }
 
     private Object getHandler(HttpServletRequest request) {
@@ -75,13 +81,12 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
-        //MemberFormControllerV4
         for (MyHandlerAdapter adapter : handlerAdapters) {
             if (adapter.supports(handler)) {
                 return adapter;
             }
         }
-        throw new IllegalArgumentException("handler adapter를 찾을 수 없습니다. handler=" + handler);
+        throw new IllegalArgumentException("handler adapter 찾을 수 없습니다. handler=" + handler);
     }
 
     private MyView viewResolver(String viewName) {
