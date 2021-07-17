@@ -39,6 +39,7 @@ public class FrontControllerServletV3 extends HttpServlet {
             return;
         }
 
+        // 서블릿에 대한 종속성을 없애기 위해 프론트컨트롤러에서 객체를 생성한 후 넘겨줌
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
 
