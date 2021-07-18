@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MappingController {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(value = "/hello-basic")
     public String helloBasic() {
@@ -24,6 +24,7 @@ public class MappingController {
 
     /**
      * 편리한 축약 애노테이션 (코드보기)
+     *
      * @GetMapping
      * @PostMapping
      * @PutMapping
@@ -39,7 +40,6 @@ public class MappingController {
     /**
      * PathVariable 사용
      * 변수명이 같으면 생략 가능
-     *
      * @PathVariable("userId") String userId -> @PathVariable userId
      * /mapping/userA
      */
@@ -60,6 +60,7 @@ public class MappingController {
 
     /**
      * 파라미터로 추가 매핑
+     * 특정 파라미터가 있거나 없는 조건을 추가할 수 있다. 잘 사용하지는 않는다.
      * params="mode",
      * params="!mode"
      * params="mode=debug"
@@ -74,6 +75,7 @@ public class MappingController {
 
     /**
      * 특정 헤더로 추가 매핑
+     * 파라미터 매핑과 비슷하지만 HTTP 헤더를 사용한다.
      * headers="mode",
      * headers="!mode"
      * headers="mode=debug"
