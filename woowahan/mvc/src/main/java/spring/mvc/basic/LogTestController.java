@@ -23,7 +23,7 @@ public class LogTestController {
         // 연산이 일어나면서 리소스 낭비
         log.trace(" trace my log=" + name);
 
-        // 올바른 사용법
+        // 요즘 사용법
         // 파라미터로 넘기면서 출력이 일어나지 않는다.
         log.trace("trace log={}", name);
         log.debug("debug log={}", name);
