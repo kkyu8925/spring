@@ -21,6 +21,7 @@ public class ResponseViewController {
         return "response/hello";
     }
 
+    // 권장하지 않는다.
     @RequestMapping("/response/hello")
     public void responseViewV3(Model model) {
         model.addAttribute("data", "hello!");

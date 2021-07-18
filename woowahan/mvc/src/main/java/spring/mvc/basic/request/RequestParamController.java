@@ -21,8 +21,7 @@ public class RequestParamController {
     public void requestParamV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));
-
-
+        log.info("username={}, age={}", username, age);
         response.getWriter().write("ok");
     }
 
@@ -80,13 +79,29 @@ public class RequestParamController {
         return "ok";
     }
 
+//    @ResponseBody
+//    @RequestMapping("/model-attribute-v1")
+//    public String modelAttributeV1(@RequestParam String username, @RequestParam int age) {
+//        HelloData helloData = new HelloData();
+//        helloData.setUsername(username);
+//        helloData.setAge(age);
+//
+//     log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+//
+//        return "ok";
+//    }
+
     @ResponseBody
     @RequestMapping("/model-attribute-v1")
     public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+//        @ModelAttribute HelloData 객체가 생성되고 값이 다들어가 있다!
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
 
+    // @ModelAttribute 생략 가능
+    // String, int, Integer 같은 단순 타입 = @RequestParam
+    // 나머지 = @ModelAttribute
     @ResponseBody
     @RequestMapping("/model-attribute-v2")
     public String modelAttributeV2(HelloData helloData) {

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@RestController
+@RestController // @Controller + @ResponseBody
 public class ResponseBodyController {
 
     @GetMapping("/response-body-string-v1")
@@ -27,7 +27,7 @@ public class ResponseBodyController {
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
-//    @ResponseBody
+    //    @ResponseBody
     @GetMapping("/response-body-string-v3")
     public String responseBodyV3() {
         return "ok";
@@ -41,6 +41,7 @@ public class ResponseBodyController {
         return new ResponseEntity<>(helloData, HttpStatus.OK);
     }
 
+    // api 만들 때 많이 씀.
     @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
     @GetMapping("/response-body-json-v2")
@@ -50,5 +51,4 @@ public class ResponseBodyController {
         helloData.setAge(20);
         return helloData;
     }
-
 }
