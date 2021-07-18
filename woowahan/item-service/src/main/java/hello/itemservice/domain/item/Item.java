@@ -2,13 +2,13 @@ package hello.itemservice.domain.item;
 
 import lombok.Data;
 
-@Data
+@Data // @Data 는 주의해서 사용
 public class Item {
 
     private Long id;
     private String itemName;
-    private Integer price;
-    private Integer quantity;
+    private Integer price; // null
+    private Integer quantity; // null
 
     public Item() {
     }
