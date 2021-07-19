@@ -1,4 +1,4 @@
-package hello.thymeleaf.basic;
+package spring.thymeleaf.basic;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -22,6 +22,7 @@ public class BasicController {
     @GetMapping("text-basic")
     public String textBasic(Model model) {
         model.addAttribute("data", "Hello <b>Spring!</b>");
+        // html escape
         return "basic/text-basic";
     }
 
@@ -60,7 +61,7 @@ public class BasicController {
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
-            return "Hello " + data;
+            return "HelloBean " + data;
         }
     }
 
@@ -75,7 +76,6 @@ public class BasicController {
         model.addAttribute("param1", "data1");
         model.addAttribute("param2", "data2");
         return "basic/link";
-
     }
 
     @GetMapping("/literal")
@@ -122,10 +122,8 @@ public class BasicController {
 
     @GetMapping("/javascript")
     public String javascript(Model model) {
-
         model.addAttribute("user", new User("UserA", 10));
         addUsers(model);
-
         return "basic/javascript";
     }
 
