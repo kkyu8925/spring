@@ -5,7 +5,7 @@ spring:
   application:
     name: discoveryservice
 
-# discoveryService 는 등록하지 않는다.
+# eureka 등록
 eureka:
   client:
     register-with-eureka: false
