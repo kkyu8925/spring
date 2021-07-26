@@ -1,12 +1,3 @@
-# msa
-- 인프런 : Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA)
-
-# woowahan
-- 인프런 로드맵 : 우아한형제들 개발팀장 김영한의 스프링 완전 정복
-
-# restful-web-service
-- 인프런 : Spring Boot를 이용한 RESTful Web Services 개발
-
 # SpringPRJforAPI
 - ajax
 - 날씨 api 
