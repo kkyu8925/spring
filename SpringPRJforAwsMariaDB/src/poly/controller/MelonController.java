@@ -13,7 +13,7 @@ public class MelonController {
 	
 	private final Logger log = Logger.getLogger(this.getClass());
 
-	@RequestMapping("/")
+	@RequestMapping("/index.do")
 	public String index() {
 		log.info("index start");
 		return "/index";
